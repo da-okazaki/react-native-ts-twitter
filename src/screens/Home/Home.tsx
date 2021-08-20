@@ -1,71 +1,60 @@
 import React from 'react';
 import { View, ScrollView, TouchableHighlight, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 
-import { width, colors } from '../../constants/Colors';
+import { width, colors } from '../../utils/utils';
 import { homeFeed } from '../../constants/MockData';
 
-const Home = () => {
+import NavigationWraper from '../../components/NavigationWraper/NavigationWraper';
+import Tweet from '../../components/Tweet/Tweet';
+
+interface Props {
+  navigation: any;
+}
+const Home = ({ navigation }: Props) => {
   return (
-    <View>
-      <Text></Text>
-    </View>
+    <NavigationWraper
+      navigation={navigation}
+      selected={0}
+      rightIcon={
+        <TouchableOpacity style={{ padding: 5 }}>
+          <Image
+            style={{ height: 30, width: 30 }}
+            source={require('../../assets/topStar.png')}
+            resizeMode={'contain'}
+          />
+        </TouchableOpacity>
+      }
+      title={
+        <Text
+          style={{
+            fontWeight: '700',
+            fontSize: 18,
+            fontFamily: 'HelveticaNeue-Bold',
+          }}
+        >
+          {'Home'}
+        </Text>
+      }
+    >
+      <ScrollView style={styles.container}>
+        {homeFeed.map((i, n) => (
+          <TouchableOpacity
+            key={n.toString()}
+            style={{
+              borderColor: colors.exlight_gray,
+              borderBottomWidth: StyleSheet.hairlineWidth,
+            }}
+            onPress={() => navigation.navigate('Tweet', { last: 'Home' })}
+          >
+            <Tweet data={i} />
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
+    </NavigationWraper>
   );
 };
 
 export default Home;
-
-/**
-import NavigationWraper from "../../components/NavigationWraper";
-import Tweet from "../../components/Tweet";
-
-class Home extends React.Component {
-  render() {
-    return (
-      <NavigationWraper
-        navigation={this.props.navigation}
-        selected={0}
-        rightIcon={
-          <TouchableOpacity style={{ padding: 5 }}>
-            <Image
-              style={{ height: 30, width: 30 }}
-              source={require("../../../assets/topStar.png")}
-              resizeMode={"contain"}
-            />
-          </TouchableOpacity>
-        }
-        title={
-          <Text
-            style={{
-              fontWeight: "700",
-              fontSize: 18,
-              fontFamily: "HelveticaNeue-Bold"
-            }}
-          >
-            {"Home"}
-          </Text>
-        }
-      >
-        <ScrollView style={styles.container}>
-          {homeFeed.map((i: any, n: any) => (
-            <TouchableOpacity
-              key={n.toString()}
-              style={{
-                borderColor: colors.exlight_gray,
-                borderBottomWidth: StyleSheet.hairlineWidth
-              }}
-              onPress={() =>
-                this.props.navigation.navigate("Tweet", { last: "Home" })
-              }
-            >
-              <Tweet data={i} />
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
-      </NavigationWraper>
-    );
-  }
-}
-*/
 
 const styles = StyleSheet.create({
   container: {

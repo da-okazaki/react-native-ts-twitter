@@ -6,7 +6,7 @@ import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 
 // Screens
-import { Home, Message, Notification, Search } from '../screens';
+import { Home, Search, Notification, Message } from '../screens';
 
 // Types
 import { BottomTabParamList, HomeParamList, MessageParamList, SearchParamList, NotificationParamList } from '../types';
@@ -26,8 +26,8 @@ export default function BottomTabNavigator() {
         }}
       />
       <BottomTab.Screen
-        name='Message'
-        component={MessageNavigator}
+        name='Search'
+        component={SearchNavigator}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name='ios-code' color={color} />,
         }}
@@ -40,8 +40,8 @@ export default function BottomTabNavigator() {
         }}
       />
       <BottomTab.Screen
-        name='Search'
-        component={SearchNavigator}
+        name='Message'
+        component={MessageNavigator}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name='ios-code' color={color} />,
         }}
@@ -56,9 +56,9 @@ function TabBarIcon(props: { name: React.ComponentProps<typeof Ionicons>['name']
 
 // Stack
 const HomeStack = createStackNavigator<HomeParamList>();
-const MessageStack = createStackNavigator<MessageParamList>();
-const NotificationStack = createStackNavigator<NotificationParamList>();
 const SearchStack = createStackNavigator<SearchParamList>();
+const NotificationStack = createStackNavigator<NotificationParamList>();
+const MessageStack = createStackNavigator<MessageParamList>();
 
 // Navigator
 function HomeNavigator() {
@@ -69,11 +69,11 @@ function HomeNavigator() {
   );
 }
 
-function MessageNavigator() {
+function SearchNavigator() {
   return (
-    <MessageStack.Navigator>
-      <MessageStack.Screen name='MessageScreen' component={Message} options={{ headerTitle: 'Message' }} />
-    </MessageStack.Navigator>
+    <SearchStack.Navigator>
+      <SearchStack.Screen name='SearchScreen' component={Search} options={{ headerTitle: 'Search' }} />
+    </SearchStack.Navigator>
   );
 }
 
@@ -89,10 +89,10 @@ function NotificationNavigator() {
   );
 }
 
-function SearchNavigator() {
+function MessageNavigator() {
   return (
-    <SearchStack.Navigator>
-      <SearchStack.Screen name='SearchScreen' component={Search} options={{ headerTitle: 'Search' }} />
-    </SearchStack.Navigator>
+    <MessageStack.Navigator>
+      <MessageStack.Screen name='MessageScreen' component={Message} options={{ headerTitle: 'Message' }} />
+    </MessageStack.Navigator>
   );
 }

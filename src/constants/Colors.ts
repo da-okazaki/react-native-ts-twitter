@@ -1,3 +1,6 @@
+import React from 'react';
+import { Image, Dimensions } from 'react-native';
+
 const tintColorLight = '#2f95dc';
 const tintColorDark = '#fff';
 
